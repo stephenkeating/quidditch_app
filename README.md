@@ -87,3 +87,19 @@ end
   <% if @current_user %> 
     Welcome, <%= @current_user.username %>
   # there's more to add here...
+
+
+
+# User stories:
+- As a user, I can login (full CRUD)
+- As a user, I can pick a house
+- As a user, I can start a game and choose my opponent house
+
+- In each turn, I can see the current score, my current energy available, and something that allows the user to see how the computer allocated energy on the previous turn (this could be more or less explicit)
+- In each turn, I can allocate energy to quaffle, bludgers, and snitch
+
+- Once the snitch is caught, the 'catching team' gets extra points and the game is over. A winner is determined based on the final scores.
+
+- Something to show the results of the game, either on the house page, or the show page of the game, etc. 
+
+
