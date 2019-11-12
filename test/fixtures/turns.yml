@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_id: 1
+  user_energy: 1
+  computer_energy: 1
+  user_score: 1
+  computer_score: 1
+  user_bludger_outcome: 1
+  computer_bludger_outcome: 1
+  user_snitch_chance: 1
+  computer_snitch_chance: 1
+
+two:
+  game_id: 1
+  user_energy: 1
+  computer_energy: 1
+  user_score: 1
+  computer_score: 1
+  user_bludger_outcome: 1
+  computer_bludger_outcome: 1
+  user_snitch_chance: 1
+  computer_snitch_chance: 1
