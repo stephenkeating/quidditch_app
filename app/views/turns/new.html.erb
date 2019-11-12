@@ -1,0 +1,7 @@
+<h1>New Turn!</h1>
+<%= form_for @turn do |f|%>
+  <%= f.label "Quaffle energy"%>
+  <%= f.select :user_quaffle_allocation, [0...10]%>
+
+  <%= f.submit %>
+<% end %>

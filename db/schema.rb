@@ -38,6 +38,9 @@ ActiveRecord::Schema.define(version: 2019_11_12_185200) do
     t.integer "computer_bludger_outcome"
     t.integer "user_snitch_chance"
     t.integer "computer_snitch_chance"
+    t.integer "user_quaffle_allocation"
+    t.integer "user_bludger_allocation"
+    t.integer "user_snitch_allocation"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

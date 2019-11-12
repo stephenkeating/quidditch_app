@@ -103,3 +103,8 @@ end
 - Something to show the results of the game, either on the house page, or the show page of the game, etc. 
 
 
+
+
+# figuring out how/when to call game logic methods
+- a user hits the button to start a new game. 
+- 

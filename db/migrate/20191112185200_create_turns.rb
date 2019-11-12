@@ -10,6 +10,9 @@ class CreateTurns < ActiveRecord::Migration[6.0]
       t.integer :computer_bludger_outcome
       t.integer :user_snitch_chance
       t.integer :computer_snitch_chance
+      t.integer :user_quaffle_allocation
+      t.integer :user_bludger_allocation
+      t.integer :user_snitch_allocation
 
       t.timestamps
     end
