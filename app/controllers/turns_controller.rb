@@ -8,15 +8,20 @@ class TurnsController < ApplicationController
   def new
     @game = Game.find(params[:game_id])
     @turn = Turn.new(:game_id => @game.id) 
+    
   end
 
   def create
     @game = Game.find(params[:game_id])
     @turn = Turn.create(turn_params)
-    byebug
+    @turn.user_energy_pt
     @turn.outcomes
-    
-    redirect_to game_turn_path(@game, @turn)
+    if @turn.user_score >= 150 || @turn.computer_score >= 150
+      @game.game_over
+      redirect_to @game
+    else
+      redirect_to game_turn_path(@game, @turn)
+    end  
   end
 
   def show

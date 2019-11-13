@@ -1,6 +1,16 @@
 class Turn < ApplicationRecord
   belongs_to :game
 
+  #getting called on new turn page
+  def user_energy_pt
+    # byebug
+    if self.game.turns.count == 1
+      self.update(user_energy: 10)
+    else
+      self.update(user_energy: (10 + (Turn.where(id: ((self.id) - 1))[0].user_bludger_outcome)))
+    end
+  end
+
   #will Turn.last work? or will it return the current turn?
   def comp_energy_pt
     
