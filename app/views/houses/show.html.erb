@@ -1,1 +1,3 @@
-house show page
+<h1>Welcome to the <%= @current_user.house.name %> Common Room!</h1>
+<br>
+<%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %>

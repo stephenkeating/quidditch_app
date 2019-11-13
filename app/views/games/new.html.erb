@@ -1,10 +1,10 @@
 <h1>New Quidditch Game!</h1>
-switch the user house selection to be automatic and remove user house as Opponent (use @current_user)
-<%= form_for @game do |f| %>
-    <%= f.label "User House" %>
-    <%= f.collection_select :user_house_id, House.all, :id, :name %><br>
+remove user house as Opponent (use @current_user) <br>
+<%# byebug %>
+<%= form_for([@current_user.house, @game]) do |f| %>
+    <%= f.hidden_field :user_house_id, :value => @current_user.house_id %>
 
-    <%= f.label "Opponent House" %>
+    <%= f.label "Pick your Opponent" %>
     <%= f.collection_select :computer_house_id, House.all, :id, :name %><br>
 
     <%= f.submit "Start Playing!"%>

@@ -18,9 +18,9 @@ class TurnsController < ApplicationController
     @turn.outcomes
     if @turn.user_score >= 150 || @turn.computer_score >= 150
       # byebug
-      redirect_to @game
+      redirect_to house_game_path(@current_user.house, @game)
     else
-      redirect_to game_turn_path(@game, @turn)
+      redirect_to house_game_turn_path(@current_user.house, @game, @turn)
     end  
   end
 

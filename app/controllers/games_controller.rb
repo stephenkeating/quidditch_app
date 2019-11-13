@@ -5,6 +5,8 @@ class GamesController < ApplicationController
     end
 
     def show #update tie message
+        @house = House.find(params[:house_id])
+        # byebug
         @game = Game.find(params[:id])
         @user_score = @game.turns.calculate(:sum, :user_score)
         @computer_score = @game.turns.calculate(:sum, :computer_score)
@@ -24,7 +26,7 @@ class GamesController < ApplicationController
     def create
         @game = Game.create(game_params)
         # byebug
-        redirect_to new_game_turn_path(@game)
+        redirect_to new_house_game_turn_path(@current_user.house, @game)
     end
 
     private

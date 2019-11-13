@@ -10,7 +10,7 @@ class UsersController < ApplicationController
       
         if user.valid?
           session[:user_id] = user.id
-          redirect_to houses_path
+          redirect_to house_path(user.house)
         else
           flash[:errors] = user.errors.full_messages
           redirect_to signup_path
