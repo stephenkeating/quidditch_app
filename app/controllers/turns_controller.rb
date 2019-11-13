@@ -1,5 +1,5 @@
 class TurnsController < ApplicationController
-  before_action :turn_outcomes, only: [:show]
+  # before_action :turn_outcomes, only: [:show]
 
   def index
     @turns = Turn.all
@@ -13,12 +13,15 @@ class TurnsController < ApplicationController
   def create
     @game = Game.find(params[:game_id])
     @turn = Turn.create(turn_params)
-    # byebug
+    byebug
+    @turn.outcomes
+    
     redirect_to game_turn_path(@game, @turn)
   end
 
   def show
     @turn = Turn.find(params[:id])
+    @game = Game.find(params[:game_id])
   end
 
 
@@ -27,4 +30,10 @@ class TurnsController < ApplicationController
   def turn_params
     params.require(:turn).permit(:game_id, :user_energy, :computer_energy, :user_score, :computer_score, :user_bludger_outcome, :computer_bludger_outcome, :user_snitch_chance, :computer_snitch_chance, :user_quaffle_allocation, :user_bludger_allocation, :user_snitch_allocation)
   end
+
+  # def turn_outcomes
+  #   @turn = Turn.find(params[:id])
+  #   @end_of_turn = @turn.outcomes
+  # end
+
 end

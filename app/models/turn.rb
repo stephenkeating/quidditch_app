@@ -3,6 +3,7 @@ class Turn < ApplicationRecord
 
   #will Turn.last work? or will it return the current turn?
   def comp_energy_pt
+    
     if self.game.turns.count == 1
       self.update(computer_energy: 10)
     else

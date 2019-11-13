@@ -1,1 +1,3 @@
-<%= @end_of_turn %>
+<p>User Score: <%= @turn.user_score %></p>
+<p>Computer Score: <%= @turn.computer_score %></p>
+<%= link_to 'Next turn', new_game_turn_path(@game) %>
