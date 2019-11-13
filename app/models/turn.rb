@@ -1,20 +1,22 @@
 class Turn < ApplicationRecord
   belongs_to :game
 
-  #will Turn.last work?
+  #will Turn.last work? or will it return the current turn?
   def comp_energy_pt
     if self.game.turns.count == 1
-      @computer_energy_points = 10
+      self.update(computer_energy: 10)
     else
-      @computer_energy_points = 10 + Turn.last.computer_bludger_outcome  
+      # @computer_energy_points = (10 + self.game.turns.last.computer_bludger_outcome)
+      self.update(computer_energy: (10 + (Turn.where(id: ((self.id) - 1))[0].computer_bludger_outcome)))
     end
   end
   
-  def computer_energy_array
+  def computer_energy_array #removing .shuffle & rearranging the variables on the next method is how we could determine how houses prioritize energy distribution
+    comp_energy_pt
     a = []
-    a << first_integer = rand(0..comp_energy_pt)
-    a << second_integer = rand(0..(comp_energy_pt - first_integer))
-    a << comp_energy_pt - (first_integer + second_integer)
+    a << first_integer = rand(0..(self.computer_energy))
+    a << second_integer = rand(0..((self.computer_energy) - first_integer))
+    a << (self.computer_energy) - (first_integer + second_integer)
     a.shuffle
   end
 
@@ -53,7 +55,7 @@ class Turn < ApplicationRecord
     end
   end
 
-  def generate_comparison_values  #think later if 5 is a good starting max range for Q/B/S
+  def generate_comparison_values  #think later if 5 is a good starting max range for Q/B and 3 for S
     assign_bonuses
     if @cq_bonus 
       @computer_quaffle_value = rand(1..(5 + @q_energy + @cq_bonus))
@@ -96,50 +98,49 @@ class Turn < ApplicationRecord
   def outcomes # tomorrow: make sure snitch odds are working. make sure they update from turn to turn. 
     generate_comparison_values
     if @user_quaffle_value > @computer_quaffle_value
-      self.user_score = 10
-      self.computer_score = 0
+      self.update(user_score: 10)
+      self.update(computer_score: 0)
       p "user scored"
     elsif @computer_quaffle_value > @user_quaffle_value
-      self.user_score = 0
-      self.computer_score = 10
+      self.update(user_score: 0)
+      self.update(computer_score: 10)
       p "computer scored"
     else 
-      self.user_score = 0
-      self.computer_score = 0
+      self.update(user_score: 0)
+      self.update(computer_score: 0)
       p "no one scored"
     end
 
     if @user_bludger_value > @computer_bludger_value
-      self.user_bludger_outcome = 5
-      self.computer_bludger_outcome = -2
+      self.update(user_bludger_outcome: 5)
+      self.update(computer_bludger_outcome: -2)
       p "user bludgered"
     elsif @computer_bludger_value > @user_bludger_value
-      self.user_bludger_outcome = -2
-      self.computer_bludger_outcome = 5
+      self.update(user_bludger_outcome: -2)
+      self.update(computer_bludger_outcome: 5)
       p "computer bludgered"
     else 
-      self.user_bludger_outcome = 0
-      self.computer_bludger_outcome = 0
+      self.update(user_bludger_outcome: 0)
+      self.update(computer_bludger_outcome: 0)
       p "no one bludgered"
     end
 
     if @user_snitch_value > @computer_snitch_value
       p "user went for the snitch"
-      self.user_snitch_chance = (@user_snitch_value - @computer_snitch_value)
-      self.computer_snitch_chance = 0
-      # call self.game.turns and then sum the user snitch chance column
-      # stephen is desperate to simplify this with activerecord
-      y = self.game.turns.map do |turn|
-        turn.user_snitch_chance
-      end
-      x = y.inject(0, :+)
-
+      p @user_snitch_value
+      p @computer_snitch_value
+      self.update(user_snitch_chance: (@user_snitch_value - @computer_snitch_value))
+      self.update(computer_snitch_chance: 0)
+      
+      x = self.game.turns.calculate(:sum, :user_snitch_chance)
+      p x
       snitch_odds = rand(1..x)
 
       r = rand(5..100)
 
       if snitch_odds > r
-        self.user_score += 150
+        # unsure if += works here
+        self.update(user_score: (self.user_score + 150))
         p "user caught snitch"
         #trigger game over logic
       end
@@ -147,27 +148,24 @@ class Turn < ApplicationRecord
 
     elsif @computer_snitch_value > @user_snitch_value
       p "computer went for the snitch"
-      self.computer_snitch_chance = (@computer_snitch_value - @user_snitch_value)
-      self.user_snitch_chance = 0
-      # call self.game.turns and then sum the user snitch chance column
-      # stephen is desperate to simplify this with activerecord
-      y = self.game.turns.map do |turn|
-        turn.computer_snitch_chance
-      end
-      x = y.inject(0, :+)
+      self.update(computer_snitch_chance: (@computer_snitch_value - @user_snitch_value))
+      self.update(user_snitch_chance: 0)
+
+      x = self.game.turns.calculate(:sum, :computer_snitch_chance)
 
       snitch_odds = rand(1..x)
 
       r = rand(5..100)
       
       if snitch_odds > r
-        self.computer_score += 150
+        # unsure if += works here
+        self.update(computer_score: (self.computer_score + 150))
         p "computer caught snitch"
         #trigger game over logic
       end
     else 
-      self.user_snitch_chance = 0
-      self.computer_snitch_chance = 0
+      self.update(user_snitch_chance: 0)
+      self.update(computer_snitch_chance: 0)
       p "no one went for the snitch"
     end
   end
@@ -191,3 +189,11 @@ end
 
 # then add .scramble to the end
 # then array[0] = quaffle, array[1] = bludger, array[2] = snitch
+
+
+# method to calculate sum of a column in an active record table: 
+# calculate(operation, column_name)
+# self.game.turns.calculate(:sum, :user_snitch_chance)
+
+# to update an attribute on an active record instance:
+# instance.update(key: value)

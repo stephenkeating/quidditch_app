@@ -20,5 +20,5 @@ game1 = Game.create(user_house_id: House.find_by(name: "Gryffindor").id, compute
 game2 = Game.create(user_house_id: slytherin.id, computer_house_id: gryffindor.id)
 
 # Turn seeds to be commented out later
-turn1 = Turn.create(game_id: Game.first.id, user_energy: 1, computer_energy: 1, user_score: 1, computer_score: 1, user_bludger_outcome: 1, computer_bludger_outcome: 1, user_snitch_chance: 1, computer_snitch_chance: 1, user_quaffle_allocation: 3, user_bludger_allocation: 1, user_snitch_allocation: 6)
-# turn2 = Turn.create(game_id: Game.first.id)
+turn1 = Turn.create(game_id: Game.first.id, user_energy: 10, computer_energy: 10, user_score: 0, computer_score: 0, user_bludger_outcome: 0, computer_bludger_outcome: 0, user_snitch_chance: 50, computer_snitch_chance: 0, user_quaffle_allocation: 3, user_bludger_allocation: 1, user_snitch_allocation: 6)
+turn2 = Turn.create(game_id: Game.first.id, user_quaffle_allocation: 3, user_bludger_allocation: 1, user_snitch_allocation: 6)
