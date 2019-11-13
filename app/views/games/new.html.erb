@@ -1,0 +1,10 @@
+<h1>New Quidditch Game!</h1>
+<%= form_for @game do |f| %>
+    <%= f.label "User House" %>
+    <%= f.collection_select :user_house_id, House.all, :id, :name %><br>
+
+    <%= f.label "Opponent House" %>
+    <%= f.collection_select :computer_house_id, House.all, :id, :name %><br>
+
+    <%= f.submit "Start Playing!"%>
+<% end %>
