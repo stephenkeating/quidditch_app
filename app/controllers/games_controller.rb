@@ -32,4 +32,5 @@ class GamesController < ApplicationController
     def game_params
         params.require(:game).permit(:user_house_id, :computer_house_id)
     end
+
 end
