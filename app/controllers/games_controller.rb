@@ -3,6 +3,19 @@ class GamesController < ApplicationController
     def index
         @games = Game.all
     end
+
+    def show #update tie message
+        @game = Game.find(params[:id])
+        @user_score = @game.turns.calculate(:sum, :user_score)
+        @computer_score = @game.turns.calculate(:sum, :computer_score)
+        if @user_score > @computer_score
+            @winner = House.find_by(id: @game.user_house_id).name
+        elsif @computer_score > @user_score
+            @winner = House.find_by(id: @game.computer_house_id).name
+        else
+            @winner = "Believe it or not, it was a tie. Quidditch is strange."
+        end
+    end
     
     def new
         @game = Game.new

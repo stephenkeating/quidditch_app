@@ -17,7 +17,7 @@ class TurnsController < ApplicationController
     @turn.user_energy_pt
     @turn.outcomes
     if @turn.user_score >= 150 || @turn.computer_score >= 150
-      @game.game_over
+      # byebug
       redirect_to @game
     else
       redirect_to game_turn_path(@game, @turn)
