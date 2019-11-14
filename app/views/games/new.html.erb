@@ -1,11 +1,10 @@
-<h1>New Quidditch Game!</h1>
-remove user house as Opponent (use @current_user) <br>
-<%# byebug %>
+<h1>Start a new Quidditch Match!</h1>
+<br>
 <%= form_for([@current_user.house, @game]) do |f| %>
-    <%= f.hidden_field :user_house_id, :value => @current_user.house_id %>
+  <%= f.hidden_field :user_house_id, :value => @current_user.house_id %>
 
-    <%= f.label "Pick your Opponent" %>
-    <%= f.collection_select :computer_house_id, House.all, :id, :name %><br>
-
-    <%= f.submit "Start Playing!"%>
+  <%= f.label "Pick your Opponent:" %>
+  <%= f.collection_select :computer_house_id, House.all.where.not(id: @current_user.house_id), :id, :name %><br>
+  <br>
+  <%= f.submit "Start Playing!"%>
 <% end %>

@@ -9,6 +9,7 @@
 House.destroy_all
 Game.destroy_all
 Turn.destroy_all
+User.destroy_all
 
 slytherin = House.create(name: "Slytherin")
 gryffindor = House.create(name: "Gryffindor")
