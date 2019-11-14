@@ -1,4 +1,11 @@
 <h1>Welcome to the <%= @current_user.house.name %> Common Room!</h1>
+
+<br><%= @house.name %> was founded by <%= @house.founder %> in 990 A.D.<br>
+<br>Your current head of house is <%= @house.head_professor %>.<br>
+
+
+
+
 <h4>Current Leaderboard:</h4>
 <% user_wins = [] %>
 <% user_losses = [] %>
@@ -32,5 +39,9 @@
 <% end %>
 <br>
 <%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %><br>
+
+
+<br><%= @house.ghost %> haunts the students of <%= @house.name %>. Be careful! <br>
+<br><%= link_to "Talk to #{@house.ghost} ", ghost_path %>
 <br>
  
