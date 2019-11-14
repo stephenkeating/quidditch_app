@@ -1,3 +1,10 @@
-<p>User Score: <%= @turn.user_score %></p>
-<p>Computer Score: <%= @turn.computer_score %></p>
+You scored <%= @turn.user_score %> points!<br>
+Your current chance of catching the snitch: <%= @game.turns.calculate(:sum, :user_snitch_chance)%>%</p>
+
+Opponent scored <%= @turn.computer_score %> points!<br>
+Opponent Energy: <%= @turn.computer_energy %> <br>
+Opponent's current chance of catching the snitch: <%= @game.turns.calculate(:sum, :computer_snitch_chance)%>% </p>
 <%= link_to 'Next turn', new_house_game_turn_path(@current_user.house, @game) %>
+
+<h3>check snitch percentages!</h3>
+
