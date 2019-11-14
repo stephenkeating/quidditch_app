@@ -18,7 +18,8 @@
   <%= f.label "Snitch Energy"%>
   <%= f.select :user_snitch_allocation, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%> 
 
-  <%= f.hidden_field :game_id, :value => @game.id %> 
+  <%= f.hidden_field :game_id, :value => @game.id %>
+   
 
   <%= f.submit %>
 <% end %>

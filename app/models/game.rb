@@ -6,11 +6,4 @@ class Game < ApplicationRecord
 
   accepts_nested_attributes_for :turns
 
-
-  def gameover
-    
-
-    
-  end
-
 end
