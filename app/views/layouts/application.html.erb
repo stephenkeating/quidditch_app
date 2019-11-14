@@ -11,14 +11,16 @@
 
   <body>
 
-  <nav>
+  <nav class="topnav">
 
     <% if @current_user %>
-      <h3>
-        Hi <%= link_to "#{@current_user.username.capitalize}", @current_user %>! | <%= link_to 'Common Room', house_path(@current_user.house_id) %> | <%= link_to 'Logout', logout_path, method: "delete" %>
-      </h3>
+        <%= link_to 'Logout', logout_path, method: "delete" %>
+        <%= link_to 'Common Room', house_path(@current_user.house_id) %>
+        <%= link_to "Hi, #{@current_user.username.capitalize}!", @current_user %>
       <% else %>
-        Welcome to the Quidditch App! | <%= link_to 'Sign up!', signup_path %> | <%= link_to 'Login', login_path %>
+        <div>Welcome to the Quidditch App!</div>
+        <%= link_to 'Sign up!', signup_path %> 
+        <%= link_to 'Login', login_path %>
     <% end %>
     
   </nav>
