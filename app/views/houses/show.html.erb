@@ -1,3 +1,23 @@
 <h1>Welcome to the <%= @current_user.house.name %> Common Room!</h1>
 <br>
 <%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %>
+<br>
+Current Leaderboard
+<br>
+<h1>fix the leaderboard</h1>
+<% if Game.find_by(user_house_id: @current_user.house_id) %>
+ <% Game.all.select do |house|%>
+  <%if house.id == @current_user.house_id %>
+    <% house.games.each do |game| %>
+      <% if game.user_score > game.computer_score %>
+        <% @winning_house = House.find_by(id: game.user_house_id) %>
+        <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= @winning_house.game.turns.calculate(:sum, :user_score) %> games!
+      <% end %>
+    <% end %>
+  <% end %>
+ <% end %>
+ <% else %>
+  <%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 games.
+ <% end %>
+
+ 

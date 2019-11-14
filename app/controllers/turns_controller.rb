@@ -7,20 +7,25 @@ class TurnsController < ApplicationController
 
   def new
     @game = Game.find(params[:game_id])
-    @turn = Turn.new(:game_id => @game.id) 
-    
+    @turn = Turn.new(:game_id => @game.id, :user_energy => @current_energy) 
+    @errors = flash[:errors]
   end
 
   def create
     @game = Game.find(params[:game_id])
     @turn = Turn.create(turn_params)
-    @turn.user_energy_pt
-    @turn.outcomes
-    if @turn.user_score >= 150 || @turn.computer_score >= 150
-      # byebug
-      redirect_to house_game_path(@current_user.house, @game)
+    # @turn.user_energy_pt
+    if @turn.valid?
+      @turn.outcomes
+      if @turn.user_score >= 150 || @turn.computer_score >= 150
+        # byebug
+        redirect_to house_game_path(@current_user.house, @game)
+      else
+        redirect_to house_game_turn_path(@current_user.house, @game, @turn)
+      end
     else
-      redirect_to house_game_turn_path(@current_user.house, @game, @turn)
+      flash[:errors] = @turn.errors.full_messages
+      redirect_to new_house_game_turn_path(@current_user.house, @game)
     end  
   end
 

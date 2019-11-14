@@ -1,23 +1,27 @@
 class Turn < ApplicationRecord
   belongs_to :game
 
-  #getting called on new turn page
-  def user_energy_pt
-    # byebug
-    if self.game.turns.count == 1
-      self.update(user_energy: 10)
-    else
-      self.update(user_energy: (10 + (Turn.where(id: ((self.id) - 1))[0].user_bludger_outcome)))
-    end
+  validate :energy_error 
+
+  def energy_error
+    
+    errors.add(:user_energy, "You must use exactly #{user_energy} energy this turn.") unless (user_quaffle_allocation + user_bludger_allocation + user_snitch_allocation) == user_energy
+  
   end
 
-  #will Turn.last work? or will it return the current turn?
+  # def user_energy_pt #getting called on new turn page
+  #   if self.game.turns.count == 1
+  #     self.update(user_energy: 10)
+  #   else
+  #     self.update(user_energy: (10 + (Turn.where(id: ((self.id) - 1))[0].user_bludger_outcome)))
+  #   end
+  # end
+
   def comp_energy_pt
     
     if self.game.turns.count == 1
       self.update(computer_energy: 10)
     else
-      # @computer_energy_points = (10 + self.game.turns.last.computer_bludger_outcome)
       self.update(computer_energy: (10 + (Turn.where(id: ((self.id) - 1))[0].computer_bludger_outcome)))
     end
   end
