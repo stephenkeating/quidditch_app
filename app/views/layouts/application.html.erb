@@ -9,7 +9,18 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+<% if House.find_by(id: @current_user.house_id).name == "Ravenclaw" %>
+  <body class="Ravenclaw">
+<% elsif House.find_by(id: @current_user.house_id).name == "Slytherin"%>
+  <body class="Slytherin">
+<% elsif House.find_by(id: @current_user.house_id).name == "Gryffindor"%>
+  <body class="Gryffindor">  
+<% elsif House.find_by(id: @current_user.house_id).name == "Hufflepuff"%>
+  <body class="Hufflepuff">
+<% else %>
+  <body class="Hogwarts">
+<% end%>
+
 
   <nav class="topnav">
 
@@ -23,7 +34,9 @@
         <%= link_to 'Login', login_path %>
     <% end %>
     
+    
   </nav>
     <%= yield %>
   </body>
 </html>
+
