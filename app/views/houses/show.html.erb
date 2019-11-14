@@ -2,7 +2,7 @@
 <h4>Current Leaderboard:</h4>
 <% user_wins = [] %>
 <% user_losses = [] %>
-<% if Game.find_by(user_house_id: @current_user.house_id) %>
+<% if Game.find_by(user_house_id: @current_user.house_id) && @game != nil %>
  <% Game.all.select do |game|%>
   <%if game.user_house_id == @current_user.house_id %>
     <% @user_score = game.turns.calculate(:sum, :user_score) %>
@@ -10,19 +10,26 @@
       <% if @user_score > @computer_score %>
         <% @winning_house = House.find_by(id: game.user_house_id) %>
         <% user_wins << @winning_house %>
-        <% else %>
+        <% elsif  %>
           <% @losing_house = House.find_by(id: Game.user_house_id) %>
           <% user_losses << @losing_house %>
       <% end %>
     <% end %>
   <% end %>
  <% else %>
-    <%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 games.
+    <%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s). <br>
  <% end %>
 
- <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!<br>
- <%= "#{House.find_by(id: @current_user.house_id).name}"%> has lost <%= "#{user_losses.count}" %> game(s).<br>
+ 
+ <% unless user_wins.count == 0 %>
+   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!<br>
+ <% end %>
 
+<% if user_losses == 0 %>
+  <%= "#{House.find_by(id: @current_user.house_id).name}"%> has never lost a game!
+<% else %>
+  <%= "#{House.find_by(id: @current_user.house_id).name}"%> has lost <%= "#{user_losses.count}" %> game(s).<br>
+<% end %>
 <br>
 <%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %><br>
 <br>
