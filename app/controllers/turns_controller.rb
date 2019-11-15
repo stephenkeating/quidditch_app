@@ -17,8 +17,12 @@ class TurnsController < ApplicationController
     # @turn.user_energy_pt
     if @turn.valid?
       @turn.outcomes
-      if @turn.user_score >= 150 || @turn.computer_score >= 150
+      if @turn.user_score >= 150 
+        flash[:snitch] = "You caught the snitch!"
+        redirect_to house_game_path(@current_user.house, @game)
         # byebug
+      elsif @turn.computer_score >= 150
+        flash[:snitch] = "Your opponent caught the snitch!"
         redirect_to house_game_path(@current_user.house, @game)
       else
         redirect_to house_game_turn_path(@current_user.house, @game, @turn)

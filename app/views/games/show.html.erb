@@ -1,9 +1,11 @@
 <h1>Game over!</h1>
 
-User Score: <%= @user_score %><br>
+<p><%= flash[:snitch] %></p>
+
+<p> User Score: <%= @user_score %></p>
 Computer Score: <%= @computer_score %>
-<br>
+<p>
 Winner: <%= @winner %>
-<br>
+</p>
 
 <%= link_to 'Back to the Common Room', house_path(@current_user.house) %>

@@ -1,5 +1,5 @@
 <h1>Start a new Quidditch Match!</h1>
-<br>
+<p>
 <%= form_for([@current_user.house, @game]) do |f| %>
   <%= f.hidden_field :user_house_id, :value => @current_user.house_id %>
 
@@ -7,4 +7,4 @@
   <%= f.collection_select :computer_house_id, House.all.where.not(id: @current_user.house_id), :id, :name %><br>
   <br>
   <%= f.submit "Start Playing!"%>
-<% end %>
+<% end %></p>
