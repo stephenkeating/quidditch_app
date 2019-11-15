@@ -1,5 +1,5 @@
 class HousesController < ApplicationController
-    before_action :set_house, only: [:show, :ghost]
+    before_action :set_house, only: [:show, :ghost, :sorted]
 
     def index
         @houses = House.all
@@ -11,6 +11,9 @@ class HousesController < ApplicationController
 
     def ghost
         @ghost_words = @house.talk_to_house_ghost
+    end
+
+    def sorted
     end
 
     private

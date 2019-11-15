@@ -2,8 +2,6 @@
   What would you like to do?
 </h1>
 
-<%= link_to "Go to the #{@current_user.house.name} Common Room", house_path(@current_user.house_id) %>
-<br>
-<%= link_to 'Change Houses', edit_user_path(@current_user.id) %>
-<br>
-<%= button_to 'Avada Kedavra Yourself!', @user, :method => :delete %>
+<%= link_to "Go to the #{@current_user.house.name} Common Room", house_path(@current_user.house_id) %><br>
+<br><%= link_to 'Visit the sorting hat', edit_user_path(@current_user.id) %><br>
+<br><%= button_to 'Avada Kedavra Yourself!', @user, :method => :delete %>

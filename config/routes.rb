@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   delete "/logout", to: "sessions#destroy", as: "logout"
   post "/sessions/reset", to: "sessions#reset"
   get "/houses/:id/ghost", to: "houses#ghost", as: "ghost"
+  get "/houses/:id/sorted", to: "houses#sorted", as: "sorted"
 end

@@ -5,8 +5,17 @@
  <%= f.text_field :username %><br>
  <%= f.label :password %>
  <%= f.password_field :password %><br>
- <%= f.label "Pick a House"%>
- <%= f.collection_select :house_id, House.all, :id, :name %><br>
+ 
+ <%= f.label "What would you least like to be called?"%>
+ <%= f.select :answer_one, ["Ordinary", "Ignorant", "Cowardly", "Selfish"] %><br>
+ <%= f.label "If you could make a potion that would guarantee you one thing, what would it be?"%>
+ <%= f.select :answer_two, @answers_to_q_two %><br>
+ <%= f.label "You and two friends need to cross a bridge guarded by a river troll who insists on fighting one of you before he will let all of you pass. What do you do?"%>
+ <%= f.select :answer_three, @answers_to_q_three %><br>
+ <%= f.label "Which road  tempts you most?"%>
+ <%= f.select :answer_four, @answers_to_q_four %><br>
+ <%= f.label "A Muggle confronts you and says that they are sure you are a witch or wizard. What do you do?"%>
+ <%= f.select :answer_five, @answers_to_q_five %><br>
   <% if flash[:errors] %>
    <ol class="messages">
      <% flash[:errors].each do |error| %>
@@ -16,5 +25,5 @@
      <% end %>
    </ol>
  <% end %>
-  <%= f.submit %>
+  <%= f.submit "Not Slytherin, not Slytherin, not Slytherin!" %>
 <% end %>
