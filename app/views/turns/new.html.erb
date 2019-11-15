@@ -1,24 +1,24 @@
 <h1>New Turn!</h1>
 
-<h3>Current Scores:</h3>
+<p>Current Scores:</p>
 <%= @current_user.house.name %>'s Score: <%= @game.turns.calculate(:sum, :user_score) %>
-<br>
+<p>
 <%= House.find_by(id: @game.computer_house_id).name %>'s Score: <%= @game.turns.calculate(:sum, :computer_score) %>
-<br></br>
+<p></p>
 <% if @game.turns.count > 0 %>
   <% @current_energy = @game.turns.last.user_bludger_outcome + 10 %>
 <% else %>
   <% @current_energy = 10%>
 <% end %>
 
- User Energy: <%= @current_energy %><br>
-<br>
+ User Energy: <%= @current_energy %><p>
+<p>
 <% if @errors%>
   <% @errors.each do |message|%>
     <div class="errors"><%= message %></div>
   <% end%>
 <% end %>
-<br>
+<p>
 <%= form_for([@current_user.house, @game, @turn]) do |f|%>
   <%= f.label "Quaffle energy"%>
   <%= f.select :user_quaffle_allocation, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>

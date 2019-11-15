@@ -14,13 +14,13 @@
 
 <h1>Welcome to the <%= @current_user.house.name %> Common Room!</h1>
 
-<br><%= @house.name %> was founded by <%= @house.founder %> in 990 A.D.<br>
-<br>Your current head of house is <%= @house.head_professor %>.<br>
+<p><%= @house.name %> was founded by <%= @house.founder %> in 990 A.D.</p>
+<p>Your current head of house is <%= @house.head_professor %>.</p>
 
-<h4>Current Leaderboard:</h4>
+<p>Current Leaderboard:</p>
 <% user_wins = [] %>
 <% user_losses = [] %>
-<% if Game.find_by(user_house_id: @current_user.house_id) && @game != nil %>
+<% if Game.find_by(user_house_id: @current_user.house_id) %>
  <% Game.all.select do |game|%>
   <%if game.user_house_id == @current_user.house_id %>
     <% @user_score = game.turns.calculate(:sum, :user_score) %>
@@ -35,24 +35,24 @@
     <% end %>
   <% end %>
  <% else %>
-    <%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s). <br>
+    <%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s). </p>
  <% end %>
 
  
  <% unless user_wins.count == 0 %>
-   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!<br>
+   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!</p>
  <% end %>
 
 <% if user_losses == 0 %>
   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has never lost a game!
 <% else %>
-  <%= "#{House.find_by(id: @current_user.house_id).name}"%> has lost <%= "#{user_losses.count}" %> game(s).<br>
+  <%= "#{House.find_by(id: @current_user.house_id).name}"%> has lost <%= "#{user_losses.count}" %> game(s).</p>
 <% end %>
-<br>
-<%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %><br>
+<p>
+<%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %></p>
 
 
-<br><%= @house.ghost %> haunts the students of <%= @house.name %>. Be careful! <br>
-<br><%= link_to "Talk to #{@house.ghost} ", ghost_path %>
-<br>
+<p><%= @house.ghost %> haunts the students of <%= @house.name %>. Be careful! </p>
+<p><%= link_to "Talk to #{@house.ghost} ", ghost_path %>
+</p>
  

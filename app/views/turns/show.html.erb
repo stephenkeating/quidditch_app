@@ -1,10 +1,33 @@
-You scored <%= @turn.user_score %> points!<br>
-Your current chance of catching the snitch: <%= @game.turns.calculate(:sum, :user_snitch_chance)%>%</p>
 
-Opponent scored <%= @turn.computer_score %> points!<br>
-Opponent Energy: <%= @turn.computer_energy %> <br>
-Opponent's current chance of catching the snitch: <%= @game.turns.calculate(:sum, :computer_snitch_chance)%>% </p>
-<%= link_to 'Next turn', new_house_game_turn_path(@current_user.house, @game) %>
+<p>You scored <%= @turn.user_score %> points!</p>
+<p><% if @turn.user_snitch_chance > 0 %>
+    You went for the snitch, but missed! 
+    <p><% if @game.turns.calculate(:sum, :user_snitch_chance) < 50 %>
+        Your odds of catching the snitch right now are low. You might want to try harder!
+    <% elsif @game.turns.calculate(:sum, :user_snitch_chance) >= 50 %>
+        You're close to catching the snitch. Keep trying and you'll be sure to catch it soon!
+    <% end %></p>
+<% else %>
+    You didn't see the snitch this turn. Hopefully you will find it soon!
+<% end %></p>
 
-<h3>check snitch percentages!</h3>
+
+<p>Opponent scored <%= @turn.computer_score %> points!</p>
+<% if @turn.computer_energy == 15 %>
+    Your opponent hit a bludger. Watch out!
+<% elsif @turn.computer_energy == 8 %>
+    Your opponent got hit by the bludger. Nice shot!
+<% end %></p>
+<% if @turn.computer_snitch_chance > 0 %>
+    Your opponent for the snitch, but missed! 
+    <p><% if @game.turns.calculate(:sum, :user_snitch_chance) < 50 %>
+        Your opponents odds of catching the snitch right now are low.
+    <% elsif @game.turns.calculate(:sum, :user_snitch_chance) >= 50 %>
+        Your opponent has spotted the snitch! Hopefully you can get to it first!
+    <% end %></p>
+<% else %>
+    Your opponent can't seem to find the snitch. 
+<% end %></p>
+<p><%= link_to 'Next turn', new_house_game_turn_path(@current_user.house, @game) %>
+
 
