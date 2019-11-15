@@ -1,10 +1,21 @@
+<% if @current_user%>
+  <% if House.find_by(id: @current_user.house_id).name == "Ravenclaw" %>
+    <img class='seal' src="/images/ravenclaw-seal.png" alt="Ravenclaw Seal">
+  <% elsif House.find_by(id: @current_user.house_id).name == "Slytherin"%>
+    <img class='seal' src="/images/slytherin-seal.png" alt="Slytherin Seal">
+  <% elsif House.find_by(id: @current_user.house_id).name == "Gryffindor"%>
+    <img class='seal' src="/images/gryffindor-seal.png" alt="Gryffindor Seal"> 
+  <% elsif House.find_by(id: @current_user.house_id).name == "Hufflepuff"%>
+    <img class='seal' src="/images/hufflepuff-seal.png" alt="Hufflepuff Seal">
+  <% end %>
+<% else %>
+  
+<% end%>
+
 <h1>Welcome to the <%= @current_user.house.name %> Common Room!</h1>
 
 <p><%= @house.name %> was founded by <%= @house.founder %> in 990 A.D.</p>
 <p>Your current head of house is <%= @house.head_professor %>.</p>
-
-
-
 
 <p>Current Leaderboard:</p>
 <% user_wins = [] %>
@@ -18,7 +29,7 @@
         <% @winning_house = House.find_by(id: game.user_house_id) %>
         <% user_wins << @winning_house %>
         <% elsif  %>
-          <% @losing_house = House.find_by(id: Game.user_house_id) %>
+          <% @losing_house = House.find_by(id: game.user_house_id) %>
           <% user_losses << @losing_house %>
       <% end %>
     <% end %>
@@ -30,6 +41,8 @@
  
  <% unless user_wins.count == 0 %>
    <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!</p>
+  <% else "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s)!
+    <%= %>
  <% end %>
 
 <% if user_losses == 0 %>
@@ -44,4 +57,3 @@
 <p><%= @house.ghost %> haunts the students of <%= @house.name %>. Be careful! </p>
 <p><%= link_to "Talk to #{@house.ghost} ", ghost_path %>
 </p>
- 

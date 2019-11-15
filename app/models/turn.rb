@@ -3,6 +3,7 @@ class Turn < ApplicationRecord
 
   validate :energy_error 
 
+  
   def energy_error
     
     errors.add(:user_energy, "You must use exactly #{user_energy} energy this turn.") unless (user_quaffle_allocation + user_bludger_allocation + user_snitch_allocation) == user_energy
