@@ -1,3 +1,47 @@
 <h1>Welcome to the <%= @current_user.house.name %> Common Room!</h1>
+
+<br><%= @house.name %> was founded by <%= @house.founder %> in 990 A.D.<br>
+<br>Your current head of house is <%= @house.head_professor %>.<br>
+
+
+
+
+<h4>Current Leaderboard:</h4>
+<% user_wins = [] %>
+<% user_losses = [] %>
+<% if Game.find_by(user_house_id: @current_user.house_id) && @game != nil %>
+ <% Game.all.select do |game|%>
+  <%if game.user_house_id == @current_user.house_id %>
+    <% @user_score = game.turns.calculate(:sum, :user_score) %>
+    <% @computer_score = game.turns.calculate(:sum, :computer_score) %>
+      <% if @user_score > @computer_score %>
+        <% @winning_house = House.find_by(id: game.user_house_id) %>
+        <% user_wins << @winning_house %>
+        <% elsif  %>
+          <% @losing_house = House.find_by(id: Game.user_house_id) %>
+          <% user_losses << @losing_house %>
+      <% end %>
+    <% end %>
+  <% end %>
+ <% else %>
+    <%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s). <br>
+ <% end %>
+
+ 
+ <% unless user_wins.count == 0 %>
+   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!<br>
+ <% end %>
+
+<% if user_losses == 0 %>
+  <%= "#{House.find_by(id: @current_user.house_id).name}"%> has never lost a game!
+<% else %>
+  <%= "#{House.find_by(id: @current_user.house_id).name}"%> has lost <%= "#{user_losses.count}" %> game(s).<br>
+<% end %>
 <br>
-<%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %>
+<%= link_to 'Start a new quidditch match!', new_house_game_path(@current_user.house) %><br>
+
+
+<br><%= @house.ghost %> haunts the students of <%= @house.name %>. Be careful! <br>
+<br><%= link_to "Talk to #{@house.ghost} ", ghost_path %>
+<br>
+ 

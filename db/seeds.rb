@@ -9,11 +9,12 @@
 House.destroy_all
 Game.destroy_all
 Turn.destroy_all
+User.destroy_all
 
-slytherin = House.create(name: "Slytherin")
-gryffindor = House.create(name: "Gryffindor")
-ravenclaw = House.create(name: "Ravenclaw")
-hufflepuff = House.create(name: "Hufflepuff")
+slytherin = House.create(name: "Slytherin", founder: "Salazar Slytherin", animal: "Snake", head_professor: "Severus Snape", ghost: "The Bloody Baron" )
+gryffindor = House.create(name: "Gryffindor", founder: "Godric Gryffindor", animal: "Lion", head_professor: "Minera McGonagall", ghost: "Nearly Headless Nick")
+ravenclaw = House.create(name: "Ravenclaw", founder: "Rowena Ravenclaw", animal: "Eagle", head_professor: "Filius Flitwick", ghost: "The Grey Lady")
+hufflepuff = House.create(name: "Hufflepuff", founder: "Helga Hufflepuff", animal: "Badger", head_professor: "Pomona Sprout", ghost: "The Fat Friar")
 
 # Game seeds to be commented out later
 game1 = Game.create(user_house_id: House.find_by(name: "Gryffindor").id, computer_house_id: House.find_by(name: "Slytherin").id)

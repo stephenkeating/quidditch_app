@@ -9,7 +9,48 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+<% if @current_user%>
+  <% if House.find_by(id: @current_user.house_id).name == "Ravenclaw" %>
+    <body class="RavenclawBody">
+  <% elsif House.find_by(id: @current_user.house_id).name == "Slytherin"%>
+    <body class="SlytherinBody">
+  <% elsif House.find_by(id: @current_user.house_id).name == "Gryffindor"%>
+    <body class="GryffindorBody">  
+  <% elsif House.find_by(id: @current_user.house_id).name == "Hufflepuff"%>
+    <body class="HufflepuffBody">
+  <% end %>
+<% else %>
+  <body class="HogwartsBody">
+<% end%>
+
+
+  <% if @current_user%>
+  <% if House.find_by(id: @current_user.house_id).name == "Ravenclaw" %>
+    <nav class="RavenclawNav">
+  <% elsif House.find_by(id: @current_user.house_id).name == "Slytherin"%>
+    <nav class="SlytherinNav">
+  <% elsif House.find_by(id: @current_user.house_id).name == "Gryffindor"%>
+    <nav class="GryffindorNav">  
+  <% elsif House.find_by(id: @current_user.house_id).name == "Hufflepuff"%>
+    <nav class="HufflepuffNav">
+  <% end %>
+<% else %>
+  <nav class="HogwartsNav">
+<% end%>
+
+    <% if @current_user %>
+        <%= link_to "Hi, #{@current_user.username.capitalize}!", @current_user %>
+        <%= link_to 'Common Room', house_path(@current_user.house_id) %>
+        <div style="float:right"><%= link_to 'Logout', logout_path, method: "delete" %></div>
+      <% else %>
+        <div style="padding: 14px 16px">Welcome to the Quidditch App!</div>
+        <%= link_to 'Sign up', signup_path %>
+        <%= link_to 'Login', login_path %>
+    <% end %>
+    
+    
+  </nav>
     <%= yield %>
   </body>
 </html>
+

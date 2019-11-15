@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    skip_before_action :authorized, only: [:new, :create]
+  skip_before_action :authorized, only: [:new, :create]
  
  def new
  end
@@ -8,10 +8,9 @@ class SessionsController < ApplicationController
    user = User.find_by(username: params[:session][:username])
    if user && user.authenticate(params[:session][:password])
      session[:user_id] = user.id
-     redirect_to houses_path
+     redirect_to house_path(user.house_id)
    else
-      byebug
-     flash[:errors] = user.errors.full_messages
+     flash[:errors] = "Invalid Login"
      redirect_to login_path
    end
  end

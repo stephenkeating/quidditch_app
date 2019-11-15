@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root to: 'pages#home'
   resources :houses do
     resources :games do 
       resources :turns
@@ -13,4 +14,6 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy", as: "logout"
   post "/sessions/reset", to: "sessions#reset"
+  get "/houses/:id/ghost", to: "houses#ghost", as: "ghost"
+  get "/houses/:id/sorted", to: "houses#sorted", as: "sorted"
 end

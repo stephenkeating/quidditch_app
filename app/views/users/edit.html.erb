@@ -1,0 +1,10 @@
+<h1>
+  Re-visit the Sorting Hat
+</h1>
+
+<%= form_for @user do |f| %>
+  <%= f.label "House" %>
+  <%= f.collection_select :house_id, House.all, :id, :name %>
+
+  <%= f.submit "Not Slytherin, not Slytherin, not Slytherin!"%>
+<% end %>
