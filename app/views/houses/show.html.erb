@@ -29,7 +29,7 @@
         <% @winning_house = House.find_by(id: game.user_house_id) %>
         <% user_wins << @winning_house %>
         <% elsif  %>
-          <% @losing_house = House.find_by(id: Game.user_house_id) %>
+          <% @losing_house = House.find_by(id: game.user_house_id) %>
           <% user_losses << @losing_house %>
       <% end %>
     <% end %>
@@ -41,6 +41,8 @@
  
  <% unless user_wins.count == 0 %>
    <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!</p>
+  <% else "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s)!
+    <%= %>
  <% end %>
 
 <% if user_losses == 0 %>
@@ -55,4 +57,3 @@
 <p><%= @house.ghost %> haunts the students of <%= @house.name %>. Be careful! </p>
 <p><%= link_to "Talk to #{@house.ghost} ", ghost_path %>
 </p>
- 
