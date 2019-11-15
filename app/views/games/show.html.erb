@@ -1,11 +1,13 @@
 <h1>Game over!</h1>
 
+<p><iframe src="https://giphy.com/embed/xT8qBjW8P17mTeYYow"  style="position:relative" frameBorder="0" class="giphy-embed" ></iframe></p>
+
 <p><%= flash[:snitch] %></p>
 
 <p> User Score: <%= @user_score %></p>
-Computer Score: <%= @computer_score %>
+<p>Computer Score: <%= @computer_score %></p>
 <p>
 Winner: <%= @winner %>
 </p>
 
-<%= link_to 'Back to the Common Room', house_path(@current_user.house) %>
+<p><%= link_to 'Back to the Common Room', house_path(@current_user.house) %></p>

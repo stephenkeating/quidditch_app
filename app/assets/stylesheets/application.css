@@ -39,8 +39,12 @@ h1 {
      text-align: center;
    }
 
+p {
+     text-align: center;
+   }
+
 select {
-	display: block;
+	display: float;
 	font-size: 12px;
 	font-family: sans-serif;
 	font-weight: 700;
@@ -63,7 +67,7 @@ select {
 }
 
 input[type="submit" i] {
-	display: block;
+     display: float;
 	font-size: 12px;
 	font-family: sans-serif;
 	font-weight: 700;
@@ -78,7 +82,7 @@ input[type="submit" i] {
 	-webkit-appearance: none;
 	appearance: none;
 	background-color: white;
-
+     
 }
 
 
@@ -236,7 +240,6 @@ input[type="submit" i] {
 
 .SlytherinBody {
      background-color: white;
-
 }
 
 .SlytherinBody select {
@@ -282,4 +285,9 @@ input[type="submit" i] {
      float: right;
      margin: 15px;
    }
+
+.giphy-embed {
+
+     margin: 10px;
+}
 

@@ -39,13 +39,13 @@
  <% end %>
 
  
- <% unless user_wins.count == 0 %>
+ <p><% if user_wins.count == 0 %>
+  <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won 0 game(s)!</p>
+  <% else %>
    <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!</p>
-  <% else "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s)!
-    <%= %>
  <% end %>
 
-<% if user_losses == 0 %>
+<p><% if user_losses == 0 %>
   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has never lost a game!
 <% else %>
   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has lost <%= "#{user_losses.count}" %> game(s).</p>
