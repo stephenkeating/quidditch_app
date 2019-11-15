@@ -5,12 +5,12 @@
   <% end %>
 
 <%= form_for :session, url: "/login" do |f| %>
-  <%= f.label :username %>
-  <%= f.text_field :username %>
-  <br>
-  <%= f.label :password %>
-  <%= f.password_field :password %>
-  <br>
-  <%= f.submit "Sign In" %>
+  <p><%= f.label :username %>
+  <%= f.text_field :username %></p>
+
+  <p><%= f.label :password %>
+  <%= f.password_field :password %></p>
+  
+  <p><%= f.submit "Sign In" %></p>
 <% end %>
 

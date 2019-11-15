@@ -1,36 +1,37 @@
 <h1>New Turn!</h1>
 
+<p><iframe src="https://giphy.com/embed/zELXwIHrToH16"  style="position:relative" frameBorder="0" class="giphy-embed" ></iframe></p>
+
 <p>Current Scores:</p>
 <p><%= @current_user.house.name %>'s Score: <%= @game.turns.calculate(:sum, :user_score) %>
-<p>
-<%= House.find_by(id: @game.computer_house_id).name %>'s Score: <%= @game.turns.calculate(:sum, :computer_score) %>
-<p></p>
+| <%= House.find_by(id: @game.computer_house_id).name %>'s Score: <%= @game.turns.calculate(:sum, :computer_score) %></p>
+
 <% if @game.turns.count > 0 %>
-  <% @current_energy = @game.turns.last.user_bludger_outcome + 10 %>
+  <p><% @current_energy = @game.turns.last.user_bludger_outcome + 10 %></p>
 <% else %>
-  <% @current_energy = 10%>
+  <p><% @current_energy = 10%></p>
 <% end %>
 
- User Energy: <%= @current_energy %><p>
+<p> User Energy: <%= @current_energy %></p>
 <p>
 <% if @errors%>
   <% @errors.each do |message|%>
     <div class="errors"><%= message %></div>
   <% end%>
 <% end %>
-<p>
+</p>
 <%= form_for([@current_user.house, @game, @turn]) do |f|%>
-  <%= f.label "Quaffle energy"%>
+  <p><%= f.label "Quaffle energy"%>
   <%= f.select :user_quaffle_allocation, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>
 
   <%= f.label "Bludger Energy"%>
   <%= f.select :user_bludger_allocation, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>
   
   <%= f.label "Snitch Energy"%>
-  <%= f.select :user_snitch_allocation, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%> 
+  <%= f.select :user_snitch_allocation, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%> </p>
 
   <%= f.hidden_field :game_id, :value => @game.id %>
   <%= f.hidden_field :user_energy, :value => @current_energy %>  
 
-  <%= f.submit %>
+  <p><%= f.submit %></p>
 <% end %>

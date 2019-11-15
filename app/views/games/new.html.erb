@@ -1,5 +1,6 @@
 
-<h1>Start a new Quidditch Match! <div><iframe src="https://giphy.com/embed/qx1qESH9700Rq" width="70%" height="70%" style="position:relative" frameBorder="0" class="giphy-embed" ></iframe></div></h1>
+<h1>Start a new Quidditch Match! </h1>
+<p><iframe src="https://giphy.com/embed/qx1qESH9700Rq"  style="position:relative" frameBorder="0" class="giphy-embed" ></iframe></p>
 <p>Quidditch Rules:</p>
 <p> Now, Quidditch is easy enough to understand, even if it’s not too easy to play.</p> 
 <p>You get 10 points every time you throw a quaffle through one of your opponent's hoops. Follow me?</p>
@@ -9,14 +10,13 @@
 
 <p>Think you’ve got all that? Great! Good luck!</p>
 
-<p>
 
-<p>
+
 <%= form_for([@current_user.house, @game]) do |f| %>
   <%= f.hidden_field :user_house_id, :value => @current_user.house_id %>
 
-  <%= f.label "Pick your Opponent:" %>
-  <%= f.collection_select :computer_house_id, House.all.where.not(id: @current_user.house_id), :id, :name %><br>
-  <br>
-  <%= f.submit "Start Playing!"%>
+  <p><%= f.label "Pick your Opponent:" %>
+  <%= f.collection_select :computer_house_id, House.all.where.not(id: @current_user.house_id), :id, :name %></p>
+  
+  <p><%= f.submit "Start Playing!"%></p>
 <% end %></p>

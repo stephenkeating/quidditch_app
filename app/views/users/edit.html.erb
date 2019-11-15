@@ -3,9 +3,9 @@
 </h1>
 
 <%= form_for @user do |f| %>
-  <%= f.label "Choose a House:" %>
+  <p><%= f.label "Choose a House:" %>
 
-  <%= f.collection_select :house_id, House.all, :id, :name %><p>
+  <%= f.collection_select :house_id, House.all, :id, :name %></p>
 
-  <%= f.submit "Not Slytherin, not Slytherin, not Slytherin!"%>
+  <p><%= f.submit "Not Slytherin, not Slytherin, not Slytherin!"%></p>
 <% end %>
