@@ -35,14 +35,14 @@
     <% end %>
   <% end %>
  <% else %>
-    <%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s). </p>
+    <p><%= "#{House.find_by(id: @current_user.house_id).name}" %> has won 0 game(s). </p>
  <% end %>
 
  
  <p><% if user_wins.count == 0 %>
   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won 0 game(s)!</p>
   <% else %>
-   <%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!</p>
+   <p><%= "#{House.find_by(id: @current_user.house_id).name}"%> has won <%= "#{user_wins.count}" %> game(s)!</p>
  <% end %>
 
 <p><% if user_losses == 0 %>
@@ -55,5 +55,4 @@
 
 
 <p><%= @house.ghost %> haunts the students of <%= @house.name %>. Be careful! </p>
-<p><%= link_to "Talk to #{@house.ghost} ", ghost_path %>
-</p>
+<p><%= link_to "Talk to #{@house.ghost} ", ghost_path %></p>

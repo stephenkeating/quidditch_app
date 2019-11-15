@@ -1,33 +1,33 @@
 
 <p>You scored <%= @turn.user_score %> points!</p>
-<p><% if @turn.user_snitch_chance > 0 %>
-    You went for the snitch, but missed! 
-    <p><% if @game.turns.calculate(:sum, :user_snitch_chance) < 50 %>
-        Your odds of catching the snitch right now are low. You might want to try harder!
+<% if @turn.user_snitch_chance > 0 %>
+    <p>You went for the snitch, but missed! </p>
+    <% if @game.turns.calculate(:sum, :user_snitch_chance) < 50 %>
+        <p>Your odds of catching the snitch right now are low. You might want to try harder!</p>
     <% elsif @game.turns.calculate(:sum, :user_snitch_chance) >= 50 %>
-        You're close to catching the snitch. Keep trying and you'll be sure to catch it soon!
-    <% end %></p>
+        <p>You're close to catching the snitch. Keep trying and you'll be sure to catch it soon!</p>
+    <% end %>
 <% else %>
-    You didn't see the snitch this turn. Hopefully you will find it soon!
-<% end %></p>
+    <p>You didn't see the snitch this turn. Hopefully you will find it soon!</p>
+<% end %>
 
 
 <p>Opponent scored <%= @turn.computer_score %> points!</p>
 <% if @turn.computer_energy == 15 %>
-    Your opponent hit a bludger. Watch out!
+    <p>Your opponent hit a bludger. Watch out!</p>
 <% elsif @turn.computer_energy == 8 %>
-    Your opponent got hit by the bludger. Nice shot!
-<% end %></p>
+    <p>Your opponent got hit by the bludger. Nice shot!</p>
+<% end %>
 <% if @turn.computer_snitch_chance > 0 %>
-    Your opponent for the snitch, but missed! 
-    <p><% if @game.turns.calculate(:sum, :user_snitch_chance) < 50 %>
-        Your opponents odds of catching the snitch right now are low.
+    <p>Your opponent for the snitch, but missed! </p>
+    <% if @game.turns.calculate(:sum, :user_snitch_chance) < 50 %>
+        <p>Your opponents odds of catching the snitch right now are low.</p>
     <% elsif @game.turns.calculate(:sum, :user_snitch_chance) >= 50 %>
-        Your opponent has spotted the snitch! Hopefully you can get to it first!
-    <% end %></p>
+        <p>Your opponent has spotted the snitch! Hopefully you can get to it first!</p>
+    <% end %>
 <% else %>
-   <p> Your opponent can't seem to find the snitch. 
-<% end %></p>
-<p><%= link_to 'Next turn', new_house_game_turn_path(@current_user.house, @game) %>
+   <p> Your opponent can't seem to find the snitch. </p>
+<% end %>
+<p><%= link_to 'Next turn', new_house_game_turn_path(@current_user.house, @game) %></p>
 
 

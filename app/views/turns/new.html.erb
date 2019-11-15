@@ -13,13 +13,13 @@
 <% end %>
 
 <p> User Energy: <%= @current_energy %></p>
-<p>
-<% if @errors%>
+
+<p><% if @errors%>
   <% @errors.each do |message|%>
     <div class="errors"><%= message %></div>
   <% end%>
-<% end %>
-</p>
+<% end %></p>
+
 <%= form_for([@current_user.house, @game, @turn]) do |f|%>
   <p><%= f.label "Quaffle energy"%>
   <%= f.select :user_quaffle_allocation, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]%>

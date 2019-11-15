@@ -4,9 +4,9 @@
 <p>Quidditch Rules:</p>
 <p> Now, Quidditch is easy enough to understand, even if it’s not too easy to play.</p> 
 <p>You get 10 points every time you throw a quaffle through one of your opponent's hoops. Follow me?</p>
-<p>Now, you've also got be careful of the bludgers as they rocket around trying to knock players off their brooms. If you get hit by one, you will lose 2 energy points for your next turn. Though, if you manage to hit one at your opponent, you'll add 5 points to your score and take 2 from theirs!<p>
+<p>Now, you've also got be careful of the bludgers as they rocket around trying to knock players off their brooms. If you get hit by one, you will lose 2 energy points for your next turn. Though, if you manage to hit one at your opponent, you'll add 5 points to your score and take 2 from theirs!</p>
 <p>Finally, there's the snitch. You might want to try hard to catch the snitch as whichever Seeker catches the Snitch wins their team an extra 150 points (so they nearly always win the match).</p>
-<p>Just a warning: a game of Quidditch only ends when the Snitch is caught, so it can go on for ages – I think the record is three months, they had to keep bringing on substitutes so the players could get some sleep.<p>
+<p>Just a warning: a game of Quidditch only ends when the Snitch is caught, so it can go on for ages – I think the record is three months, they had to keep bringing on substitutes so the players could get some sleep.</p>
 
 <p>Think you’ve got all that? Great! Good luck!</p>
 
@@ -19,4 +19,4 @@
   <%= f.collection_select :computer_house_id, House.all.where.not(id: @current_user.house_id), :id, :name %></p>
   
   <p><%= f.submit "Start Playing!"%></p>
-<% end %></p>
+<% end %>
